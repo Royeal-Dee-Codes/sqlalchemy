@@ -16,8 +16,8 @@ def product_get_by_id(product_id):
 
 
 @product.route('/products', methods=['GET'])
-def get_all_products():
-    return controllers.get_all_products(request)
+def products_get_all():
+    return controllers.products_get_all(request)
 
 
 @product.route('/product/category', methods=['POST'])
@@ -26,5 +26,5 @@ def product_category_add():
 
 
 @product.route('/product/<product_id>', methods=['PUT'])
-def update_product(product_id):
-    return controllers.update_product(request, product_id)
+def product_update(product_id):
+    return controllers.product_update(request, product_id)

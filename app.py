@@ -1,15 +1,9 @@
-from flask import Flask, jsonify, request
+from flask import Flask
 import psycopg2
 import os
 
 from db import *
-
-from models.companies import Companies
-# from models.products import Products
-# from models.categories import Categories
-
-import routes.companies_routes
-import routes.products_route
+from util.blueprints import register_blueprints
 
 flask_host = os.environ.get("FLASK_HOST")
 flask_port = os.environ.get("FLASK_PORT")
@@ -20,8 +14,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_uri
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-app.register_blueprint(routes.companies_routes.companies)
-app.register_blueprint(routes.products_route.product)
+register_blueprints(app)
 
 init_db(app, db)
 

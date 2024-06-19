@@ -1,5 +1,6 @@
 import uuid
 from sqlalchemy.dialects.postgresql import UUID
+import marshmallow as ma
 
 from db import db
 from models.products_categories_xref import products_categories_xref
@@ -25,3 +26,15 @@ class Products(db.Model):
         self.price = price
         self.company_id = company_id
         self.active = active
+
+
+class ProductsSchema(ma.Schema):
+    class Meta:
+        fields = ['product_id', 'product_name', 'description', 'price', 'company', 'active']
+    company = ma.fields.Nested("CompaniesSchema", exclude=['products'])
+    category = ma.fields.Nested("CategoriesSchema", many=True, exclude=['products'])
+    warranty = ma.fields.Nested("WarrantiesSchema", exclude=['product'])
+
+
+product_schema = ProductsSchema()
+products_schema = ProductsSchema(many=True)
