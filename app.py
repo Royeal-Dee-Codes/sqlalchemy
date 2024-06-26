@@ -25,7 +25,8 @@ def create_tables():
         db.create_all()
         print("tables created successfully")
 
-        create_tables()
+
+create_tables()
 
 
 if __name__ == "__main__":

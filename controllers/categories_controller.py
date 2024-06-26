@@ -18,7 +18,7 @@ def category_add(req):
         db.session.rollback()
         return jsonify({"message": "unable to create record"}), 400
 
-    return jsonify({"message": "company created", "result": category_schema.dump(new_category)}), 201
+    return jsonify({"message": "category created", "result": category_schema.dump(new_category)}), 201
 
 
 def categories_get_all():
@@ -54,7 +54,7 @@ def category_update(req, category_id):
 
 
 def category_delete(category_id):
-    category_query = db.session.query(Categories).filter(Categories.category_id).first()
+    category_query = db.session.query(Categories).filter(Categories.category_id == category_id).first()
 
     if not category_query:
         return jsonify({"message": f"category {category_id} does not exist"}), 404

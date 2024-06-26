@@ -25,6 +25,6 @@ def company_update(company_id):
     return controllers.company_update(request, company_id)
 
 
-@companies.route('/companies/delete/<company_id>', methods=['DELETE'])
+@companies.route('/company/delete/<company_id>', methods=['DELETE'])
 def company_delete(company_id):
     return controllers.company_delete(company_id)

@@ -59,7 +59,7 @@ def company_update(req, company_id):
 
 
 def company_delete(company_id):
-    company_query = db.session.query(Companies).filter(Companies.company_id).first()
+    company_query = db.session.query(Companies).filter(Companies.company_id == company_id).first()
 
     if not company_query:
         return jsonify({"message": f"company {company_id} does not exist"}), 404

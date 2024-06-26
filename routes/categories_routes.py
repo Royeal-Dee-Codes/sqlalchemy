@@ -20,11 +20,11 @@ def categories_get_by_id(category_id):
     return controllers.category_get_by_id(category_id)
 
 
-@categories.route('/categories/<category_id>', methods=['PUT'])
+@categories.route('/category/<category_id>', methods=['PUT'])
 def category_update(category_id):
     return controllers.category_update(request, category_id)
 
 
-@categories.route('/categories/delete/<category_id>', methods=['DELETE'])
+@categories.route('/category/delete/<category_id>', methods=['DELETE'])
 def category_delete(category_id):
     return controllers.category_delete(category_id)

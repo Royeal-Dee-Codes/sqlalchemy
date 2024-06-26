@@ -10,9 +10,9 @@ class Categories(db.Model):
     __tablename__ = "Categories"
 
     category_id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    category_name = db.Column(db.String(), nullabl=False)
+    category_name = db.Column(db.String(), nullable=False)
 
-    products = db.relationship('Products', back_populates='categories', secondary=products_categories_xref)
+    products = db.relationship('Products', back_populates='categories', cascade='all', secondary=products_categories_xref)
 
     def __init__(self, category_name):
         self.category_name = category_name
