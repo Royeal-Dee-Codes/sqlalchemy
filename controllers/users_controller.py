@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, request
 from flask_bcrypt import generate_password_hash
 
 from db import db
@@ -6,8 +6,8 @@ from models.app_users import AppUsers, app_user_schema, app_users_schema
 from util.reflection import populate_object
 
 
-def user_add(req):
-    post_data = req.form if req.form else req.get_json()
+def user_add(request):
+    post_data = request.form if request.form else request.json
 
     new_user = AppUsers.new_user_obj()
 
@@ -18,8 +18,9 @@ def user_add(req):
     try:
         db.session.add(new_user)
         db.session.commit()
+
     except:
         db.session.rollback()
         return jsonify({"message": "unable to create user"}), 400
 
-    return jsonify({"message": "user created", "result": app_user_schema.dump(new_user)}), 201
+    return jsonify({"message": "user created", "results": app_user_schema.dump(new_user)}), 201

@@ -27,6 +27,9 @@ class Products(db.Model):
         self.company_id = company_id
         self.active = active
 
+    def new_product_obj():
+        return Products("", "", 0, "", True)
+
 
 class ProductsSchema(ma.Schema):
     class Meta:

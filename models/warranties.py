@@ -12,7 +12,7 @@ class Warranties(db.Model):
     warranty_months = db.Column(db.Integer(), nullable=False)
     product_id = db.Column(UUID(as_uuid=True), db.ForeignKey('Products.product_id'), unique=True)
 
-    product = db.relationship('Products', back_populates='warranty', uselist=False)
+    product = db.relationship('Products', back_populates='warranty', uselist=False, cascade='all')
 
     def __init__(self, warranty_months, product_id):
         self.product_id = product_id
